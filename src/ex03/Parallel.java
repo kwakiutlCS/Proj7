@@ -25,15 +25,17 @@ public class Parallel {
 		
 		// calculate max
 		pool.submit(new Runnable() {
+
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
 				double max = Functions.getMax(numbers);
 				System.out.println("max -> "+max);
 			}
+			
 		});
 
-		// calculate max
+		// calculate min
 		pool.submit(new Runnable() {
 			@Override
 			public void run() {
@@ -49,16 +51,12 @@ public class Parallel {
 		
 		
 		// calculate time
-		pool.submit(new Runnable() {
-			long finishTime = System.currentTimeMillis();
-			@Override
-			public void run() {
-				System.out.println("time -> "+(finishTime-startTime)+" ms");
-			}
-		});
+		long finishTime = System.currentTimeMillis();
+		
 				
 		
 		System.out.println("avg -> "+avg);
+		System.out.println("time -> "+(finishTime-startTime)+" ms");
 		
 	}
 

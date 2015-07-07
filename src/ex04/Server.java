@@ -2,6 +2,7 @@ package ex04;
 
 import java.util.Random;
 import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -9,7 +10,7 @@ public class Server {
 	private static final int NUM_THREADS = 6;
 	private static final int CAPACITY = 5;
 	
-	ArrayBlockingQueue<Double> queue = new ArrayBlockingQueue<>(CAPACITY);
+	BlockingQueue<Double> queue = new ArrayBlockingQueue<>(CAPACITY);
 	
 	public void add(double x) {
 		try {
@@ -45,9 +46,9 @@ public class Server {
 				while (true) {
 					//System.out.println("master antes");
 					server.add(rand.nextDouble()*max_number);
-//					try {
-//						//Thread.sleep(1000);
-//					} catch (InterruptedException e) {}
+					try {
+						Thread.sleep(1000);
+					} catch (InterruptedException e) {}
 					//System.out.println("master");
 				}
 			}

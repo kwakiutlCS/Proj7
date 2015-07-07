@@ -13,6 +13,7 @@ public class Ex02 implements Runnable {
 		}
 	}
 	
+	
 	public Ex02(int number) {
 		this.taskNumber = number;
 	}
@@ -30,6 +31,7 @@ public class Ex02 implements Runnable {
 		}
 		System.out.println("Hello World, I am thread "+Thread.currentThread().getId()+" running task "+taskNumber);
 		semaphores[taskNumber-1].release();
+		
 	}
 
 }
