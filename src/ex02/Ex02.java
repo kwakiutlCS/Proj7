@@ -4,7 +4,7 @@ import java.util.concurrent.Semaphore;
 
 
 public class Ex02 implements Runnable {
-	private int number;
+	private int taskNumber;
 	private static Semaphore[] semaphores = new Semaphore[Main.NUM_TASKS];
 	
 	static {
@@ -14,22 +14,22 @@ public class Ex02 implements Runnable {
 	}
 	
 	public Ex02(int number) {
-		this.number = number;
+		this.taskNumber = number;
 	}
 	
 	public void run() {
-		if (number % 2 == 0 && number != 2) {
+		if (taskNumber % 2 == 0 && taskNumber != 2) {
 			try {
-				semaphores[number-4].acquire();
+				semaphores[taskNumber-4].acquire();
 			} catch (InterruptedException e) {}
 		}
-		else if (number % 2 == 1) {
+		else if (taskNumber % 2 == 1) {
 			try {
-				semaphores[number].acquire();
+				semaphores[taskNumber].acquire();
 			} catch (InterruptedException e) {}
 		}
-		System.out.println("Hello World, I am thread "+Thread.currentThread().getId()+" running task "+number);
-		semaphores[number-1].release();
+		System.out.println("Hello World, I am thread "+Thread.currentThread().getId()+" running task "+taskNumber);
+		semaphores[taskNumber-1].release();
 	}
 
 }
