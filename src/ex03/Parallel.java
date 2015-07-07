@@ -21,7 +21,7 @@ public class Parallel {
 		final double[] numbers = Functions.getDoubleArray(size);
 		
 		
-		long startTime = System.currentTimeMillis();
+		final long startTime = System.currentTimeMillis();
 		
 		// calculate max
 		pool.submit(new Runnable() {
@@ -47,10 +47,19 @@ public class Parallel {
 		// calculate average
 		double avg = Functions.getAvg(numbers);
 		
-		long finishTime = System.currentTimeMillis();
+		
+		// calculate time
+		pool.submit(new Runnable() {
+			long finishTime = System.currentTimeMillis();
+			@Override
+			public void run() {
+				System.out.println("time -> "+(finishTime-startTime)+" ms");
+			}
+		});
+				
 		
 		System.out.println("avg -> "+avg);
-		System.out.println("time -> "+(finishTime-startTime)+" ms");
+		
 	}
 
 }

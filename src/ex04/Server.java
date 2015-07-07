@@ -12,7 +12,12 @@ public class Server {
 	ArrayBlockingQueue<Double> queue = new ArrayBlockingQueue<>(CAPACITY);
 	
 	public void add(double x) {
-		queue.add(x);
+		try {
+			queue.put(x);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public Double get() {
@@ -38,10 +43,12 @@ public class Server {
 				int max_number = 100;
 				
 				while (true) {
+					//System.out.println("master antes");
 					server.add(rand.nextDouble()*max_number);
-					try {
-						Thread.sleep(1000);
-					} catch (InterruptedException e) {}
+//					try {
+//						//Thread.sleep(1000);
+//					} catch (InterruptedException e) {}
+					//System.out.println("master");
 				}
 			}
 			
