@@ -6,8 +6,10 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class Server {
-	private static final int NUM_THREADS = 4;
-	ArrayBlockingQueue<Double> queue = new ArrayBlockingQueue<>(10);
+	private static final int NUM_THREADS = 6;
+	private static final int CAPACITY = 5;
+	
+	ArrayBlockingQueue<Double> queue = new ArrayBlockingQueue<>(CAPACITY);
 	
 	public void add(double x) {
 		queue.add(x);
