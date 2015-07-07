@@ -12,7 +12,7 @@ public class ExA {
 	
 	public static void main(String[] args) {
 		
-		final BlockingQueue<Double> results = new ArrayBlockingQueue<>(4);
+		final BlockingQueue<Double> results = new ArrayBlockingQueue<>(40);
 		final CountDownLatch signal = new CountDownLatch(NUM_THREADS);
 		
 		(new Thread(new Runnable() {
@@ -44,9 +44,10 @@ public class ExA {
 				public void run() {
 					Random rand = new Random();
 					int max_number = 100;
-					double partial = rand.nextDouble()*max_number;
-					results.add(partial);
-					
+
+					for (int i = 0; i < 10; i++) {
+						results.add(rand.nextDouble()*max_number);
+					}
 					signal.countDown();
 				}
 				
