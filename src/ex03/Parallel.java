@@ -1,7 +1,10 @@
 package ex03;
 
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 public class Parallel {
 	public static void main(String[] args) {
@@ -24,31 +27,36 @@ public class Parallel {
 		final long startTime = System.currentTimeMillis();
 		
 		// calculate max
-		pool.submit(new Runnable() {
+		Future<Double> maxFuture = pool.submit(new Callable<Double>() {
 
 			@Override
-			public void run() {
+			public Double call() {
 				// TODO Auto-generated method stub
-				double max = Functions.getMax(numbers);
-				System.out.println("max -> "+max);
+				return Functions.getMax(numbers);
 			}
 			
 		});
 
 		// calculate min
-		pool.submit(new Runnable() {
+		Future<Double> minFuture = pool.submit(new Callable<Double>() {
 			@Override
-			public void run() {
+			public Double call() {
 				// TODO Auto-generated method stub
-				double min = Functions.getMin(numbers);
-				System.out.println("min -> "+min);
+				return Functions.getMin(numbers);
 			}
 		});
 				
 				
 		// calculate average
 		double avg = Functions.getAvg(numbers);
+		double max = 0, min = 0;
 		
+		try {
+			max = maxFuture.get();
+			min = minFuture.get();
+		} catch (InterruptedException | ExecutionException e) {}
+		
+		pool.shutdown();
 		
 		// calculate time
 		long finishTime = System.currentTimeMillis();
@@ -56,6 +64,8 @@ public class Parallel {
 				
 		
 		System.out.println("avg -> "+avg);
+		System.out.println("max -> "+max);
+		System.out.println("min -> "+min);
 		System.out.println("time -> "+(finishTime-startTime)+" ms");
 		
 	}

@@ -15,10 +15,7 @@ public class Server {
 	public void add(double x) {
 		try {
 			queue.put(x);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		} catch (InterruptedException e) {}
 	}
 	
 	public Double get() {
@@ -44,12 +41,10 @@ public class Server {
 				int max_number = 100;
 				
 				while (true) {
-					//System.out.println("master antes");
 					server.add(rand.nextDouble()*max_number);
 					try {
 						Thread.sleep(1000);
 					} catch (InterruptedException e) {}
-					//System.out.println("master");
 				}
 			}
 			
@@ -69,5 +64,7 @@ public class Server {
 				
 			});
 		}
+		
+		pool.shutdown();
 	}
 }
