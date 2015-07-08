@@ -18,13 +18,13 @@ public class Parallel {
 			return;
 		}
 		
-		ExecutorService pool = Executors.newFixedThreadPool(2);
 		
 		// generate numbers
 		final double[] numbers = Functions.getDoubleArray(size);
 		
 		
 		final long startTime = System.currentTimeMillis();
+		ExecutorService pool = Executors.newFixedThreadPool(2);
 		
 		// calculate max
 		Future<Double> maxFuture = pool.submit(new Callable<Double>() {

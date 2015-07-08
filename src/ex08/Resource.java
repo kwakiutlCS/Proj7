@@ -10,20 +10,20 @@ import java.util.TreeSet;
 
 public class Resource {
 	private int threadsActive = 0;
-	private List<Task> tasks = new LinkedList<>();
+	private List<Task> waitingTasks = new LinkedList<>();
 	
 	public void enter(Task task) {
 		synchronized(this) {
 			System.out.println(task+" asked permission to execute function");
-			while (threadsActive > 0 || (tasks.size() > 0 && !tasks.get(0).equals(task))) {
+			while (threadsActive > 0 || (waitingTasks.size() > 0 && !waitingTasks.get(0).equals(task))) {
 				try {
-					if (!tasks.contains(task)) {
-						tasks.add(task);
+					if (!waitingTasks.contains(task)) {
+						waitingTasks.add(task);
 					}
 					wait();
 				} catch (InterruptedException e) {}
 			}
-			tasks.remove(task);
+			waitingTasks.remove(task);
 			threadsActive++;
 		}
 		
@@ -39,9 +39,9 @@ public class Resource {
 		notifyAll();
 	}
 	
-	
+	// critical region
 	private void execute(Task task) {
-		System.out.println(task+" is accessing the resource");
+		System.out.println("\n"+task+" is accessing the resource\n");
 		// simulating work
 		try {
 			Thread.sleep(1000);

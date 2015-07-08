@@ -2,7 +2,7 @@ package ex03;
 
 public class Main {
 	public static void main(String[] args) {
-		int[] points = new int[]{100, 1000, 10000, 100000, 1000000, 10000000, 100000000};
+		int[] points = new int[]{1, 10, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000};
 
 		// sequential
 		System.out.println("Sequential");
