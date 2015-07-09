@@ -43,7 +43,7 @@ public class Server {
 				while (true) {
 					server.add(rand.nextDouble()*max_number);
 					try {
-						Thread.sleep(1000);
+						Thread.sleep(rand.nextInt(900)+100);
 					} catch (InterruptedException e) {}
 				}
 			}
@@ -58,7 +58,7 @@ public class Server {
 				public void run() {
 					while (true) {
 						double n = server.get();
-						System.out.println("Thread "+Thread.currentThread().getId()+" -> square root of "+n+" is "+Math.sqrt(n));
+						System.out.format("Thread %d -> square root of %.2f is %.2f%n", Thread.currentThread().getId(), n, Math.sqrt(n));
 					}
 				}
 				

@@ -28,6 +28,7 @@ public class PriorityTask implements Runnable, Comparable<PriorityTask> {
 	public void run() {
 		Random rand = new Random();
 		while (true) {
+			// generates a random priority (higher is more important)
 			priority = rand.nextInt(100);
 			resource.enter(this);
 		}

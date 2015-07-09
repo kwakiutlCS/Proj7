@@ -21,6 +21,7 @@ public class Resource {
 			// remove task from waiting list and add threads active
 			waitingTasks.poll();
 			threadsActive++;
+			System.out.println("\n"+task+" is accessing the resource\n");
 		}
 		
 		execute(task);
@@ -38,7 +39,6 @@ public class Resource {
 	
 	
 	private void execute(PriorityTask task) {
-		System.out.println("\n"+task+" is accessing the resource\n");
 		// simulating work
 		try {
 			Thread.sleep(1000);
