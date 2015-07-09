@@ -10,25 +10,25 @@ public class PingPong {
 		
 		// start other thread
 		new Thread(new Runnable() {
-			boolean writing = true;
+			boolean writer = true;
 			@Override
 			public void run() {
 				String s = "ping";
 				while (true) {
-					if (writing) System.out.println(s);
+					if (writer) System.out.println(s);
 					try {
-						writing = exchanger.exchange(writing);
+						writer = exchanger.exchange(writer);
 					} catch (InterruptedException e) {}
 				}
 			}
 		}).start();
 		
 		String s = "pong";
-		boolean writing = false;
+		boolean writer = false;
 		while (true) {
-			if (writing) System.out.println(s);
+			if (writer) System.out.println(s);
 			try {
-				writing = exchanger.exchange(writing);
+				writer = exchanger.exchange(writer);
 			} catch (InterruptedException e) {}
 		}
 	}

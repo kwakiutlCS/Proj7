@@ -1,5 +1,6 @@
 package ex03;
 
+import java.util.Arrays;
 import java.util.Random;
 
 public class Functions {
@@ -17,8 +18,8 @@ public class Functions {
 	}
 	
 	public static double getAvg(double[] numbers) {
-		double total = 0;
 		
+		double total = 0;
 		for (int i = 0; i < numbers.length; i++) {
 			total += numbers[i];
 		}
