@@ -43,7 +43,4 @@ public class Resource {
 		threadsActive--;
 		notifyAll();
 	}
-	
-	
-	
 }

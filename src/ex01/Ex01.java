@@ -12,7 +12,5 @@ public class Ex01 implements Runnable {
 	public void run() {
 		System.out.println("Hello World, I am thread "+Thread.currentThread().getId()+" running task "+taskNumber);
 	}
-	
-	
 
 }
