@@ -4,44 +4,34 @@ import java.util.PriorityQueue;
 
 public class Resource {
 	private int threadsActive = 0;
-	private PriorityQueue<PriorityTask> waitingTasks = new PriorityQueue<>();
+	private PriorityQueue<Integer> waitingTasks = new PriorityQueue<>();
 	
-	public void enter(PriorityTask task) {
+	public void enter(int priority) {
 		synchronized(this) {
-			System.out.println(task+" asked permission to execute function");
 			// add task to queue
-			waitingTasks.add(task);
+			waitingTasks.add(priority);
 			
-			while (threadsActive > 0 || !waitingTasks.peek().equals(task)) {
+			while (threadsActive > 0 || waitingTasks.peek() != priority) {
 				try {
 					wait();
 				} catch (InterruptedException e) {}
 			}
 			
 			// remove task from waiting list and add threads active
+			System.out.println("priority list: "+waitingTasks);
 			waitingTasks.poll();
 			threadsActive++;
-			System.out.println("\n"+task+" is accessing the resource\n");
+			
 		}
-		
-		execute(task);
-		leave(task);
 	}
 	
 	
-	private synchronized void leave(PriorityTask task) {
-		System.out.println(task+" stopped execution on resource");
-		
+	public synchronized void leave() {
 		// reduce active thread count and notify others
 		threadsActive--;
 		notifyAll();
 	}
 	
 	
-	private void execute(PriorityTask task) {
-		// simulating work
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {}
-	}
+	
 }
