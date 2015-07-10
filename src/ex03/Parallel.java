@@ -27,41 +27,24 @@ public class Parallel {
 		ExecutorService pool = Executors.newFixedThreadPool(2);
 		
 		// calculate max
-		Future<Double> maxFuture = pool.submit(new Callable<Double>() {
-
-			@Override
-			public Double call() {
-				// TODO Auto-generated method stub
-				return Functions.getMax(numbers);
-			}
-			
-		});
-
+		Future<Double> maxFuture = pool.submit(() -> {return Functions.getMax(numbers);});
 		// calculate min
-		Future<Double> minFuture = pool.submit(new Callable<Double>() {
-			@Override
-			public Double call() {
-				// TODO Auto-generated method stub
-				return Functions.getMin(numbers);
-			}
-		});
-				
-				
+		Future<Double> minFuture = pool.submit(() -> {return Functions.getMin(numbers);});
 		// calculate average
-		double avg = Functions.getAvg(numbers);
-		double max = 0, min = 0;
+		Future<Double> avgFuture = pool.submit(() -> {return Functions.getAvg(numbers);});
+		
+		double max = 0, min = 0, avg = 0;
 		
 		try {
 			max = maxFuture.get();
 			min = minFuture.get();
+			avg = avgFuture.get();
 		} catch (InterruptedException | ExecutionException e) {}
 		
 		pool.shutdown();
 		
 		// calculate time
 		long finishTime = System.currentTimeMillis();
-		
-				
 		
 		System.out.println("avg -> "+avg);
 		System.out.println("max -> "+max);
