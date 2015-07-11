@@ -56,7 +56,6 @@ public class ExB {
 					int max_number = 100;
 					double partial = rand.nextDouble()*max_number;
 					results.add(partial);
-					System.out.println("partial "+partial);
 					
 					// signaling single thread
 					finishSignal.countDown();

@@ -1,18 +1,11 @@
-package ex08b;
+package ex08;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
-import java.util.SortedSet;
-import java.util.TreeSet;
 
 public class Resource {
 	private static final int TASKS_MAXIMUM = 20000000;
 	private int threadsActive = 0;
-	private static int nextOrderNo = 999990;
-	private static int nextTask = 999990;
+	private static int nextOrderNo = 1;
+	private static int nextTask = 1;
 	
 	public void enter(Task task) {
 		synchronized(this) {
@@ -29,7 +22,7 @@ public class Resource {
 			nextTask++;
 			nextTask %= TASKS_MAXIMUM;
 			threadsActive++;
-			System.out.println("\n"+task+" is accessing the resource\n"+nextTask);
+			System.out.println("\n"+task+" is accessing the resource\n");
 		}
 		
 		execute(task);

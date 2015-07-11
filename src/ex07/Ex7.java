@@ -14,7 +14,7 @@ public class Ex7 {
 	
 	public static void main(String[] args) {
 		
-		final CyclicBarrier barrier = new CyclicBarrier(4);
+		final CyclicBarrier barrier = new CyclicBarrier(4, () -> System.out.println("Barrier"));
 		
 		
 		for (int i = 0; i < NUM_THREADS; i++) {

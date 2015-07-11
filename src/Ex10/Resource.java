@@ -1,27 +1,20 @@
 package Ex10;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
-import java.util.SortedSet;
-import java.util.TreeSet;
 
 public class Resource {
 	private Mutex mutex = new Mutex();
 	
 	public void enter(Task task) {
-		System.out.println(task+" asked permission to execute function");
+		//System.out.println(task+" asked permission to execute function");
 		mutex.lock();
-		System.out.println("\n"+task+" is accessing the resource\n");
+		System.out.println(task+" is accessing the resource");
 		execute(task);
 		leave(task);
 	}
 	
 	
 	private void leave(Task task) {
-		System.out.println(task+" stopped execution on resource");
+		System.out.println(task+" stopped execution on resource\n");
 		mutex.unlock();
 	}
 	

@@ -10,6 +10,8 @@ public class Parallel {
 	public static void main(String[] args) {
 		if (args.length != 1) return;
 		
+		
+		// gets vector size via command line arguments
 		int size;
 		try {
 			size = Integer.parseInt(args[0]);
@@ -18,13 +20,12 @@ public class Parallel {
 			return;
 		}
 		
-		
+
 		// generate numbers
 		final double[] numbers = Functions.getDoubleArray(size);
 		
-		
 		final long startTime = System.currentTimeMillis();
-		ExecutorService pool = Executors.newFixedThreadPool(2);
+		ExecutorService pool = Executors.newFixedThreadPool(3);
 		
 		// calculate max
 		Future<Double> maxFuture = pool.submit(() -> {return Functions.getMax(numbers);});
@@ -33,6 +34,8 @@ public class Parallel {
 		// calculate average
 		Future<Double> avgFuture = pool.submit(() -> {return Functions.getAvg(numbers);});
 		
+		pool.shutdown();
+
 		double max = 0, min = 0, avg = 0;
 		
 		try {
@@ -41,7 +44,6 @@ public class Parallel {
 			avg = avgFuture.get();
 		} catch (InterruptedException | ExecutionException e) {}
 		
-		pool.shutdown();
 		
 		// calculate time
 		long finishTime = System.currentTimeMillis();

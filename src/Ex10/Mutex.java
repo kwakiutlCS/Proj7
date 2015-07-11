@@ -2,6 +2,7 @@ package Ex10;
 
 import java.util.concurrent.locks.AbstractQueuedSynchronizer;
 
+
 class Mutex extends AbstractQueuedSynchronizer {
 
 	private static final long serialVersionUID = -1775794736267209361L;
@@ -28,5 +29,6 @@ class Mutex extends AbstractQueuedSynchronizer {
 
 	public void lock()                { acquire(0); }
 	public void unlock()              { release(0); }
+
 
 }

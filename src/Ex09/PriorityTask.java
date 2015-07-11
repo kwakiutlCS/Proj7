@@ -34,21 +34,31 @@ public class PriorityTask implements Runnable, Comparable<PriorityTask> {
 		Random rand = new Random();
 		while (true) {
 			// generates a random priority (higher is more important)
+<<<<<<< HEAD
 			priority = rand.nextInt(10);
 			resource.enter(this);
+=======
+			priority = rand.nextInt(100);
+			resource.enter(priority);
+>>>>>>> 3765bce0f5c39c819f976636fa3a9e43523af430
 			execute();
 			resource.leave();
 		}
 	}
+<<<<<<< HEAD
 
 
 	public int getPriority() {
 		return priority;
 	}
+=======
+	
+>>>>>>> 3765bce0f5c39c819f976636fa3a9e43523af430
 	
 	private void execute() {
 		// simulating work
 		try {
+<<<<<<< HEAD
 			Thread.sleep(1000);
 		} catch (InterruptedException e) {}
 	}
@@ -61,5 +71,15 @@ public class PriorityTask implements Runnable, Comparable<PriorityTask> {
 
 	public void setOrderNo(int orderNo) {
 		this.orderNo = orderNo;
+=======
+			System.out.println("\n"+this+" is accessing the resource\n");
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {}
+	}
+	
+	
+	public int getPriority() {
+		return priority;
+>>>>>>> 3765bce0f5c39c819f976636fa3a9e43523af430
 	}
 }

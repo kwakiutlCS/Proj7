@@ -74,4 +74,8 @@ public class Task implements Runnable {
 			Thread.sleep(1000);
 		} catch (InterruptedException e) {}
 	}
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 3765bce0f5c39c819f976636fa3a9e43523af430
